@@ -22,6 +22,7 @@ from six.moves import urllib
 from girder.api.rest import getApiUrl, RestException
 from .base import ProviderBase
 from .. import constants
+import os
 
 
 class GitHub(ProviderBase):
@@ -80,7 +81,7 @@ class GitHub(ProviderBase):
             'Authorization': 'token %s' % token['access_token'],
             'Accept': 'application/json'
         }
-
+        github_whitelist = self.__getWhitelist()
         # Get user's email address
         # In the unlikely case that a user has more than 30 email addresses,
         # this HTTP request might have to be made multiple times with pagination
@@ -106,6 +107,9 @@ class GitHub(ProviderBase):
 
         login = resp.get('login', None)
 
+        if login not in github_whitelist:
+            raise RestException("User not whitelisted.", code=502)
+
         names = resp.get('name', '').split()
         firstName = names[0] if names else ''
         lastName = names[-1] if len(names) > 1 else ''
@@ -113,3 +117,12 @@ class GitHub(ProviderBase):
         user = self._createOrReuseUser(oauthId, email, firstName, lastName,
                                        login)
         return user
+
+    def __getWhitelist(self):
+        script_dir = os.path.dirname(__file__)
+        path = os.path.join(script_dir, 'whitelists/github_whitelist.txt')
+        names = []
+        for line in open(path, 'r'):
+            names.append(line.strip())
+        return names
+
