@@ -39,6 +39,10 @@ class Bitbucket(ProviderBase):
         return self.model('setting').get(
             constants.PluginSettings.BITBUCKET_CLIENT_SECRET)
 
+    def getClientWhitelistSetting(self):
+        return self.model('setting').get(
+            constants.PluginSettings.BITBUCKET_WHITELIST)
+
     @classmethod
     def getUrl(cls, state):
         clientId = cls.model('setting').get(

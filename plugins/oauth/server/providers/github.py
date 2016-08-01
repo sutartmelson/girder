@@ -40,6 +40,10 @@ class GitHub(ProviderBase):
         return self.model('setting').get(
             constants.PluginSettings.GITHUB_CLIENT_SECRET)
 
+    def getClientWhitelistSetting(self):
+        return self.model('setting').get(
+            constants.PluginSettings.GITHUB_WHITELIST)
+
     @classmethod
     def getUrl(cls, state):
         clientId = cls.model('setting').get(

@@ -28,7 +28,7 @@ from girder.utility import config, model_importer
 
 
 class ProviderBase(model_importer.ModelImporter):
-    def __init__(self, redirectUri, clientId=None, clientSecret=None):
+    def __init__(self, redirectUri, clientId=None, clientSecret=None, clientWhitelist=None):
         """
         Base class for OAuth2 providers. The purpose of these classes is to
         perform the user information lookup to their respective provider
@@ -44,6 +44,8 @@ class ProviderBase(model_importer.ModelImporter):
         """
         self.clientId = clientId or self.getClientIdSetting()
         self.clientSecret = clientSecret or self.getClientSecretSetting()
+        self.clientWhitelist = clientWhitelist or self.getClientWhitelistSetting()
+        self.whitelist = self._parseWhitelist(self.clientWhitelist)
         self.redirectUri = redirectUri
 
     @classmethod
@@ -58,6 +60,9 @@ class ProviderBase(model_importer.ModelImporter):
         raise NotImplementedError()
 
     def getClientSecretSetting(self):
+        raise NotImplementedError()
+
+    def getClientWhitelistSetting(self):
         raise NotImplementedError()
 
     @classmethod
@@ -119,6 +124,12 @@ class ProviderBase(model_importer.ModelImporter):
             return json.loads(content)
         except ValueError:
             raise RestException('Non-JSON response: %s' % content, code=502)
+
+    @classmethod
+    def _parseWhitelist(cls, clientWhitelist):
+        whitelist = []
+        whitelist = [name.strip() for name in clientWhitelist.split(',')]
+        return whitelist
 
     @classmethod
     def _createOrReuseUser(cls, oauthId, email, firstName, lastName,

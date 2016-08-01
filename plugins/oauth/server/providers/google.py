@@ -39,6 +39,10 @@ class Google(ProviderBase):
         return self.model('setting').get(
             constants.PluginSettings.GOOGLE_CLIENT_SECRET)
 
+    def getClientWhitelistSetting(self):
+        return self.model('setting').get(
+            constants.PluginSettings.GOOGLE_WHITELIST)
+
     @classmethod
     def getUrl(cls, state):
         clientId = cls.model('setting').get(

@@ -39,6 +39,10 @@ class LinkedIn(ProviderBase):
         return self.model('setting').get(
             constants.PluginSettings.LINKEDIN_CLIENT_SECRET)
 
+    def getClientWhitelistSetting(self):
+        return self.model('setting').get(
+            constants.PluginSettings.LINKEDIN_WHITELIST)
+
     @classmethod
     def getUrl(cls, state):
         clientId = cls.model('setting').get(
