@@ -44,8 +44,8 @@ class ProviderBase(model_importer.ModelImporter):
         """
         self.clientId = clientId or self.getClientIdSetting()
         self.clientSecret = clientSecret or self.getClientSecretSetting()
-        self.clientWhitelist = clientWhitelist or self.getClientWhitelistSetting()
-        self.whitelist = self._parseWhitelist(self.clientWhitelist)
+        wl = clientWhitelist or self.getClientWhitelistSetting()
+        self.clientWhitelist = self._parseWhitelist(wl)
         self.redirectUri = redirectUri
 
     @classmethod
