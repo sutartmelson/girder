@@ -128,7 +128,8 @@ class ProviderBase(model_importer.ModelImporter):
     @classmethod
     def _parseWhitelist(cls, clientWhitelist):
         whitelist = []
-        whitelist = [name.strip() for name in clientWhitelist.split(',')]
+        if clientWhitelist:
+            whitelist = [name.strip() for name in clientWhitelist.split(',')]
         return whitelist
 
     @classmethod

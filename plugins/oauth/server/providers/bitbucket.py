@@ -112,7 +112,10 @@ class Bitbucket(ProviderBase):
         if not oauthId:
             raise RestException('Bitbucket did not return a user ID.', code=502)
 
-        login = resp.get('username', None)
+        login = resp.get('login', None)
+        if self.clientWhitelist:
+            if login not in self.clientWhitelist:
+                raise RestException("User not whitelisted.", code=502)
 
         names = resp.get('display_name', '').split()
         firstName = names[0] if names else ''

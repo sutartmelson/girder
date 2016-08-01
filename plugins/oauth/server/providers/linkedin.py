@@ -100,6 +100,10 @@ class LinkedIn(ProviderBase):
             raise RestException(
                 'This LinkedIn user has no registered email address.', code=502)
 
+        if self.clientWhitelist:
+            if email not in self.clientWhitelist:
+                raise RestException("User not whitelisted.", code=502)
+
         # Get user's name
         firstName = resp.get('firstName', '')
         lastName = resp.get('lastName', '')

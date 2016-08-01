@@ -22,7 +22,6 @@ from six.moves import urllib
 from girder.api.rest import getApiUrl, RestException
 from .base import ProviderBase
 from .. import constants
-import os
 
 
 class GitHub(ProviderBase):
@@ -120,5 +119,3 @@ class GitHub(ProviderBase):
         user = self._createOrReuseUser(oauthId, email, firstName, lastName,
                                        login)
         return user
-
-

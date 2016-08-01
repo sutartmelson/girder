@@ -116,6 +116,10 @@ class Google(ProviderBase):
                 'This Google Plus user has no available email address.',
                 code=502)
 
+        if self.clientWhitelist:
+            if email not in self.clientWhitelist:
+                raise RestException("User not whitelisted.", code=502)
+
         # Get user's name
         firstName = resp.get('name', {}).get('givenName', '')
         lastName = resp.get('name', {}).get('familyName', '')
