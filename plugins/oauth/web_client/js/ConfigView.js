@@ -15,6 +15,9 @@ girder.views.oauth_ConfigView = girder.View.extend({
             }, {
                 key: 'oauth.' + providerId + '_client_secret',
                 value: this.$('#g-oauth-provider-' + providerId + '-client-secret').val().trim()
+            }, {
+                key: 'oauth.' + providerId + '_whitelist',
+                value: this.$('#g-oauth-provider-' + providerId + '-whitelist').val().trim()
             }]);
         }
     },
@@ -63,6 +66,7 @@ girder.views.oauth_ConfigView = girder.View.extend({
         _.each(this.providerIds, function (id) {
             settingKeys.push('oauth.' + id + '_client_id');
             settingKeys.push('oauth.' + id + '_client_secret');
+            settingKeys.push('oauth.' + id + '_whitelist');
         }, this);
 
         girder.restRequest({
@@ -105,6 +109,8 @@ girder.views.oauth_ConfigView = girder.View.extend({
                     this.settingVals['oauth.' + id + '_client_id']);
                 this.$('#g-oauth-provider-' + id + '-client-secret').val(
                     this.settingVals['oauth.' + id + '_client_secret']);
+                this.$('#g-oauth-provider-' + id + '-whitelist').val(
+                    this.settingVals['oauth.' + id + '_whitelist']);
             }, this);
         }
 

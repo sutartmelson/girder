@@ -36,6 +36,11 @@ p Only fill in the information for the OAuth2 providers you wish to enable.
               input.input-sm.form-control(id="g-oauth-provider-#{provider.id}-client-secret",
                                           type="text",
                                           placeholder="Client secret")
+            .form-group
+              label.control-label(for="g-oauth-provider-#{provider.id}-whitelist") #{provider.name} whitelist
+              input.input-sm.form-control(id="g-oauth-provider-#{provider.id}-whitelist",
+                                          type="text",
+                                          placeholder="Usernames")
             p.g-validation-failed-message(id="g-oauth-provider-#{provider.id}-error-message")
             input.btn.btn-sm.btn-primary(type="submit",
                                          value="Save",

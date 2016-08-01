@@ -38,7 +38,11 @@ def validateSettings(event):
                  constants.PluginSettings.GOOGLE_CLIENT_SECRET,
                  constants.PluginSettings.GITHUB_CLIENT_SECRET,
                  constants.PluginSettings.LINKEDIN_CLIENT_SECRET,
-                 constants.PluginSettings.BITBUCKET_CLIENT_SECRET):
+                 constants.PluginSettings.BITBUCKET_CLIENT_SECRET,
+                 constants.PluginSettings.GOOGLE_WHITELIST,
+                 constants.PluginSettings.GITHUB_WHITELIST,
+                 constants.PluginSettings.LINKEDIN_WHITELIST,
+                 constants.PluginSettings.BITBUCKET_WHITELIST,):
         event.preventDefault().stopPropagation()
 
 

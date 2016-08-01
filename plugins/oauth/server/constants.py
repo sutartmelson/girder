@@ -24,12 +24,16 @@ class PluginSettings:
 
     GOOGLE_CLIENT_ID = 'oauth.google_client_id'
     GOOGLE_CLIENT_SECRET = 'oauth.google_client_secret'
+    GOOGLE_WHITELIST = 'oauth.google_whitelist'
 
     GITHUB_CLIENT_ID = 'oauth.github_client_id'
     GITHUB_CLIENT_SECRET = 'oauth.github_client_secret'
+    GITHUB_WHITELIST = 'oauth.github_whitelist'
 
     LINKEDIN_CLIENT_ID = 'oauth.linkedin_client_id'
     LINKEDIN_CLIENT_SECRET = 'oauth.linkedin_client_secret'
+    LINKEDIN_WHITELIST = 'oauth.linkedin_whitelist'
 
     BITBUCKET_CLIENT_ID = 'oauth.bitbucket_client_id'
     BITBUCKET_CLIENT_SECRET = 'oauth.bitbucket_client_secret'
+    BITBUCKET_WHITELIST = 'oauth.bitbucket_whitelist'
