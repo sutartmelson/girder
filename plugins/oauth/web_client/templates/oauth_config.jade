@@ -1,7 +1,10 @@
 .g-config-breadcrumb-container
 
 .g-oauth-provider-list-title Configure supported providers below
-p Only fill in the information for the OAuth2 providers you wish to enable.
+p.
+  Only fill in the information for the OAuth2 providers you wish to enable.
+  Google and LinkedIn whitelists require the user email. Bitbucket and
+  GitHub whitelists require username.
 
 .panel-group#g-oauth-provider-accordion
   each provider in providers
@@ -41,6 +44,7 @@ p Only fill in the information for the OAuth2 providers you wish to enable.
               input.input-sm.form-control(id="g-oauth-provider-#{provider.id}-whitelist",
                                           type="text",
                                           placeholder="Usernames")
+              | Entries need to be separated by commas.
             p.g-validation-failed-message(id="g-oauth-provider-#{provider.id}-error-message")
             input.btn.btn-sm.btn-primary(type="submit",
                                          value="Save",
